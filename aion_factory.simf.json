@@ -1,0 +1,327 @@
+{
+  "version": "1.0",
+  "sceneName": "Guangzhou_Smart_Factory_Aion_Line",
+  "units": {
+    "length": "mm",
+    "angle": "deg"
+  },
+
+  "environment": {
+    "gravity": -9.81,
+    "grid": true
+  },
+
+  "factory": {
+    "name": "Guangzhou Smart Factory - Aion Line",
+    "zones": [
+      {
+        "zoneName": "Stamping",
+        "description": "Area where vehicle body panels are stamped and formed.",
+        "assets": [
+          {
+            "id": "press_1",
+            "label": "Press 1",
+            "type": "Stamping Press",
+            "transform": { "x": 10000, "y": 20000, "z": 0 },
+            "energy": { "consumption_kW": 15 },
+            "kinematics": {
+              "axes": 6,
+              "ranges": {
+                "axis1_mm": 1000,
+                "axis2_mm": 500,
+                "axis3_mm": 750,
+                "axis4_deg": 360,
+                "axis5_deg": 180,
+                "axis6_deg": 270
+              }
+            }
+          },
+          {
+            "id": "press_2",
+            "label": "Press 2",
+            "type": "Stamping Press",
+            "transform": { "x": 30000, "y": 10000, "z": 0 },
+            "energy": { "consumption_kW": 20 },
+            "kinematics": {
+              "axes": 8,
+              "ranges": {
+                "axis1_mm": 1200,
+                "axis2_mm": 600,
+                "axis3_mm": 900,
+                "axis4_deg": 450,
+                "axis5_deg": 220,
+                "axis6_deg": 315,
+                "axis7_mm": 150,
+                "axis8_deg": 90
+              }
+            }
+          }
+        ],
+        "safety": [
+          {
+            "type": "Operator",
+            "shape": "sphere",
+            "radius_mm": 2000,
+            "transform": { "x": 15000, "y": 15000, "z": 0 }
+          }
+        ],
+        "paths": [
+          {
+            "type": "walkingPath",
+            "nodes": [
+              { "x": 5000, "y": 5000, "z": 0 },
+              { "x": 35000, "y": 15000, "z": 0 }
+            ]
+          }
+        ]
+      },
+
+      {
+        "zoneName": "Welding",
+        "description": "Robot arms weld vehicle body panels.",
+        "assets": [
+          {
+            "id": "kuka_kr16",
+            "type": "Robot",
+            "model": "KUKA KR 16",
+            "transform": { "x": 25000, "y": 25000, "z": 0 },
+            "timing": { "cycleTime_s": 12.5 },
+            "kinematics": {
+              "axes": 6,
+              "ranges": {
+                "axis1_mm": 1500,
+                "axis2_mm": 750,
+                "axis3_mm": 1000,
+                "axis4_deg": 360,
+                "axis5_deg": 270,
+                "axis6_deg": 360
+              }
+            }
+          },
+          {
+            "id": "abb_irb460",
+            "type": "Robot",
+            "model": "ABB IRB 460",
+            "transform": { "x": 35000, "y": 15000, "z": 0 },
+            "timing": { "cycleTime_s": 8.7 },
+            "kinematics": {
+              "axes": 6,
+              "ranges": {
+                "axis1_mm": 1800,
+                "axis2_mm": 900,
+                "axis3_mm": 1200,
+                "axis4_deg": 360,
+                "axis5_deg": 270,
+                "axis6_deg": 360
+              }
+            }
+          }
+        ],
+        "safety": [
+          {
+            "type": "Robot",
+            "shape": "sphere",
+            "radius_mm": 3000,
+            "transform": { "x": 25000, "y": 25000, "z": 0 }
+          }
+        ],
+        "paths": [
+          {
+            "type": "walkingPath",
+            "nodes": [
+              { "x": 20000, "y": 20000, "z": 0 },
+              { "x": 40000, "y": 10000, "z": 0 }
+            ]
+          }
+        ]
+      },
+
+      {
+        "zoneName": "Painting",
+        "description": "Painting and surface treatment zone.",
+        "assets": [
+          {
+            "id": "paint_booth_1",
+            "type": "Spray Booth",
+            "transform": { "x": 50000, "y": 10000, "z": 0 },
+            "energy": { "consumption_kW": 30 },
+            "kinematics": {
+              "axes": 4,
+              "ranges": {
+                "axis1_mm": 5000,
+                "axis2_mm": 2500,
+                "axis3_mm": 1500,
+                "axis4_deg": 360
+              }
+            }
+          },
+          {
+            "id": "paint_booth_2",
+            "type": "Spray Booth",
+            "transform": { "x": 60000, "y": 20000, "z": 0 },
+            "energy": { "consumption_kW": 35 },
+            "kinematics": {
+              "axes": 4,
+              "ranges": {
+                "axis1_mm": 6000,
+                "axis2_mm": 3000,
+                "axis3_mm": 1800,
+                "axis4_deg": 360
+              }
+            }
+          }
+        ],
+        "safety": [
+          {
+            "type": "Operator",
+            "radius_mm": 2000,
+            "shape": "sphere",
+            "transform": { "x": 55000, "y": 15000, "z": 0 }
+          },
+          {
+            "type": "Spray Zone",
+            "radius_mm": 5000,
+            "shape": "sphere",
+            "transform": { "x": 55000, "y": 15000, "z": 0 }
+          }
+        ],
+        "paths": [
+          {
+            "type": "walkingPath",
+            "nodes": [
+              { "x": 45000, "y": 5000, "z": 0 },
+              { "x": 70000, "y": 25000, "z": 0 }
+            ]
+          }
+        ]
+      },
+
+      {
+        "zoneName": "Assembly",
+        "description": "Vehicle assembly and integration.",
+        "assets": [
+          {
+            "id": "conveyor_a",
+            "type": "Conveyor",
+            "transform": { "x": 80000, "y": 10000, "z": 0 },
+            "motion": { "speed_mps": 0.2, "accel": 1.5, "decel": 2.0 }
+          },
+          {
+            "id": "conveyor_b",
+            "type": "Conveyor",
+            "transform": { "x": 90000, "y": 20000, "z": 0 },
+            "motion": { "speed_mps": 0.2, "accel": 1.8, "decel": 2.2 }
+          }
+        ],
+        "safety": [
+          {
+            "type": "Operator",
+            "shape": "sphere",
+            "radius_mm": 2000,
+            "transform": { "x": 85000, "y": 15000, "z": 0 }
+          }
+        ],
+        "paths": [
+          {
+            "nodes": [
+              { "x": 75000, "y": 5000, "z": 0 },
+              { "x": 95000, "y": 25000, "z": 0 }
+            ]
+          }
+        ]
+      },
+
+      {
+        "zoneName": "Testing",
+        "description": "Final validation & testing.",
+        "assets": [
+          {
+            "id": "test_stand_1",
+            "type": "Test Stand",
+            "transform": { "x": 110000, "y": 10000, "z": 0 },
+            "energy": { "consumption_kW": 10 }
+          },
+          {
+            "id": "test_stand_2",
+            "type": "Test Stand",
+            "transform": { "x": 120000, "y": 20000, "z": 0 },
+            "energy": { "consumption_kW": 12 }
+          }
+        ],
+        "safety": [
+          {
+            "type": "Operator",
+            "shape": "sphere",
+            "radius_mm": 2000,
+            "transform": { "x": 115000, "y": 15000, "z": 0 }
+          }
+        ],
+        "paths": [
+          {
+            "nodes": [
+              { "x": 105000, "y": 5000, "z": 0 },
+              { "x": 130000, "y": 25000, "z": 0 }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "dataInterfaces": {
+    "communication": {
+      "protocol": "MQTT",
+      "latency_ms": 300,
+      "dataVolume_DPPS": 2000
+    },
+    "sources": [
+      {
+        "id": "mes",
+        "role": "Work Order & Takt Tracking",
+        "frequency": "realtime",
+        "fields": ["WO Status", "VIN"]
+      },
+      {
+        "id": "scada",
+        "role": "Machine Control",
+        "frequency": "1Hz",
+        "fields": [
+          "Machine Error Code",
+          "Paint Nozzle Pressure",
+          "Paint Nozzle Temperature",
+          "Assembly Torque"
+        ]
+      },
+      {
+        "id": "erp",
+        "role": "Inventory",
+        "frequency": "event",
+        "fields": ["Inventory Level", "Scheduled Delivery Date"]
+      },
+      {
+        "id": "vision",
+        "role": "Quality Control",
+        "frequency": "endOfCycle",
+        "fields": ["NCR", "Dimensional Deviations"]
+      }
+    ]
+  },
+
+  "useCases": [
+    {
+      "id": "mixed_model_integration",
+      "description": "Simulate integration of a new model and detect bottlenecks.",
+      "kpi": "Mixed Model Production Efficiency"
+    },
+    {
+      "id": "energy_optimization",
+      "description": "Simulate power reduction during low demand windows.",
+      "kpi": "Operational Cost & Carbon Footprint"
+    },
+    {
+      "id": "predictive_defect",
+      "description": "Predict defect probability before QC.",
+      "kpi": "Predictive Defect Rate"
+    }
+  ]
+}
